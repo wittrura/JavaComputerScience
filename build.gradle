@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'main.Playground'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'gs-gradle'
+    version =  '0.1.0'
+}
+
+dependencies {
+    compile 'log4j:log4j:1.2.17'
+    testCompile 'junit:junit:4.12'
+}
