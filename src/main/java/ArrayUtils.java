@@ -3,11 +3,11 @@ package main;
 public class ArrayUtils {
 
   public int[] reverse(int[] array) {
-
+    return array;
   };
 
   public int[] push(int[] array, int num) {
-
+    return array;
   };
 
   public static void print(int[] array) {

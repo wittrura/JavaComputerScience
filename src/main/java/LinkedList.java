@@ -23,17 +23,17 @@ public class LinkedList {
 
   // returns the element at the specified position in this list.
 	public int get(int index) {
-
+		return 0;
 	}
 
   // removes the element at the specified position in this list.
 	public boolean remove(int index) {
-
+		return false;
 	}
 
   // returns the number of elements in this list.
 	public int size() {
-
+		return 0;
 	}
 
 	public String toString() {
