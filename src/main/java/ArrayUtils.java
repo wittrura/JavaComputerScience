@@ -2,11 +2,11 @@ package main;
 
 public class ArrayUtils {
 
-  public int[] reverse(int[] array) {
+  public static int[] reverse(int[] array) {
     return array;
   };
 
-  public int[] push(int[] array, int num) {
+  public static int[] push(int[] array, int num) {
     return array;
   };
 
