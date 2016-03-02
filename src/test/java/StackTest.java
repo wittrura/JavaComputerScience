@@ -63,7 +63,7 @@ public class StackTest {
   //   Assert.assertEquals(false, stack.isEmpty());
   //   Assert.assertEquals(42, stack.pop());
   //   Assert.assertEquals(false, stack.isEmpty());
-  //   Assert.assertEquals(99, stack.pop());
+  //   Assert.assertEquals(7, stack.pop());
   //   Assert.assertEquals(true, stack.isEmpty());
   // }
 }
