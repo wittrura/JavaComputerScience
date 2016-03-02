@@ -37,7 +37,7 @@ public class LinkedList {
 	}
 
 	public String toString() {
-		Node current = head.getNext();
+		Node current = head;
 		String output = "";
 		while(current != null) {
 			output += "[" + String.valueOf(current.getData()) + "]";
