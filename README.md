@@ -10,8 +10,10 @@ The purpose of this repo is to practice CS data structures and algorithms.
 ### Usage
 
 To run code in `src/java/main/Playground.java`:
+
 `gradle run`
 
 To run tests:
+
 1. Uncomment test (including `@Test`)
 2. `gradle test`
