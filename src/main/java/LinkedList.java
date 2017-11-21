@@ -59,12 +59,27 @@ public class LinkedList {
 
   // removes the element at the specified position in this list.
 	public boolean remove(int index) {
-	    return false;
+        if (index > this.listCount) {
+            return false;
+        }
+
+        int i = 0;
+        Node current = this.head;
+        Node previous = null;
+        while (i < index) {
+            previous = current;
+            current = current.getNext();
+            i++;
+        }
+
+        previous.setNext(current.getNext());
+        this.listCount--;
+        return true;
 	}
 
   // returns the number of elements in this list.
 	public int size() {
-		return 0;
+		return this.listCount;
 	}
 
 	public String toString() {
