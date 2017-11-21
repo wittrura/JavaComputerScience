@@ -6,24 +6,24 @@ import org.junit.Assert;
 
 public class QueueTest {
 
-   @Test
-   public void emptyQueueisEmpty() {
-     Queue queue = new Queue();
-     Assert.assertEquals(true, queue.isEmpty());
-   }
+//   @Test
+//   public void emptyQueueisEmpty() {
+//     Queue queue = new Queue();
+//     Assert.assertEquals(true, queue.isEmpty());
+//   }
 
-   @Test
-   public void canEnqueue() {
-     Queue queue = new Queue();
-     queue.enqueue(7);
-     Assert.assertEquals(false, queue.isEmpty());
-
-     queue.enqueue(42);
-     Assert.assertEquals(false, queue.isEmpty());
-
-     queue.enqueue(99);
-     Assert.assertEquals(false, queue.isEmpty());
-   }
+//   @Test
+//   public void canEnqueue() {
+//     Queue queue = new Queue();
+//     queue.enqueue(7);
+//     Assert.assertEquals(false, queue.isEmpty());
+//
+//     queue.enqueue(42);
+//     Assert.assertEquals(false, queue.isEmpty());
+//
+//     queue.enqueue(99);
+//     Assert.assertEquals(false, queue.isEmpty());
+//   }
 
   // @Test
   // public void canGetFront() {

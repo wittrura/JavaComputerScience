@@ -13,22 +13,53 @@ public class LinkedList {
 
   // appends the specified element to the end of this list.
 	public void add(int data) {
-
+	    if (this.head == null) {
+	        this.head = new Node(data);
+        } else {
+	        Node temp = this.head;
+            while(temp.getNext() != null){
+	            temp = temp.getNext();
+            }
+	        temp.setNext(new Node(data));
+        }
+        this.listCount++;
 	}
 
   // inserts the specified element at the specified position in this list.
 	public void add(int data, int index) {
+        int i = 0;
+        Node current = this.head;
+        Node previous = null;
+        while (i < index) {
+            previous = current;
+            current = current.getNext();
+            i++;
+        }
 
+        Node newNode = new Node(data, current);
+        previous.setNext(newNode);
+        this.listCount++;
 	}
 
   // returns the element at the specified position in this list.
 	public int get(int index) {
-		return 0;
+	    if (index > this.listCount) {
+	        return 0;
+        }
+
+        Node temp = this.head;
+	    int data;
+	    int i = 0;
+        while (i < index) {
+            temp = temp.getNext();
+            i++;
+        }
+        return temp.getData();
 	}
 
   // removes the element at the specified position in this list.
 	public boolean remove(int index) {
-		return false;
+	    return false;
 	}
 
   // returns the number of elements in this list.

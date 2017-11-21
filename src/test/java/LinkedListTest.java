@@ -6,29 +6,29 @@ import org.junit.Assert;
 
 public class LinkedListTest {
 
-  // @Test
-  // public void ShouldAdd() {
-  //   LinkedList linkedList = new LinkedList();
-  //   linkedList.add(4);
-  //   linkedList.add(8);
-  //   linkedList.add(15);
-  //   linkedList.add(16);
-  //   linkedList.add(23);
-  //   linkedList.add(42);
-  //   Assert.assertEquals(15, linkedList.get(2));
-  //   Assert.assertEquals(42, linkedList.get(5));
-  // }
-  //
-  // @Test
-  // public void ShouldAddToIndex() {
-  //   LinkedList linkedList = new LinkedList();
-  //   linkedList.add(4);
-  //   linkedList.add(8);
-  //   linkedList.add(15);
-  //   Assert.assertEquals(15, linkedList.get(2));
-  //   linkedList.add(42, 2);
-  //   Assert.assertEquals(42, linkedList.get(2));
-  // }
+   @Test
+   public void ShouldAdd() {
+     LinkedList linkedList = new LinkedList();
+     linkedList.add(4);
+     linkedList.add(8);
+     linkedList.add(15);
+     linkedList.add(16);
+     linkedList.add(23);
+     linkedList.add(42);
+     Assert.assertEquals(15, linkedList.get(2));
+     Assert.assertEquals(42, linkedList.get(5));
+   }
+
+   @Test
+   public void ShouldAddToIndex() {
+     LinkedList linkedList = new LinkedList();
+     linkedList.add(4);
+     linkedList.add(8);
+     linkedList.add(15);
+     Assert.assertEquals(15, linkedList.get(2));
+     linkedList.add(42, 2);
+     Assert.assertEquals(42, linkedList.get(2));
+   }
   //
   // @Test
   // public void ShouldRemove() {
