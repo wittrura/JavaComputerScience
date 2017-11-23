@@ -42,24 +42,38 @@ public class Graph {
 
   // Get the size of the graph by returning how many nodes are in the graph
   public int size () {
-    return -1;
+    return this.nodes.size();
   }
 
   // Find the total number of edges in the graph
   public int numEdges () {
-    return -1;
+      return this.edges.size();
   }
 
   // Find the total weight of the graph by adding up the weights of each edge
   public int weight () {
-    return -1;
+      int numEdges = this.numEdges();
+      int weight = 0;
+      for (int i = 0; i < numEdges; i++) {
+          weight += this.edges.get(i).weight;
+      }
+      return weight;
   }
 
   // Find all node values a node is connected to.
   // Return all node values at the other side of an edge of the target node
   // Remember that edges are not directional: A -> B also implies B -> A
   public ArrayList<String> findNeighbors(String value) {
-    return new ArrayList<String>();
+      ArrayList<String> neighbors = new ArrayList<String>();
+      this.edges.forEach((edge) -> {
+          if (edge.first.value.equals(value)) {
+              neighbors.add(edge.second.value);
+          } else if (edge.second.value.equals(value)) {
+              neighbors.add(edge.first.value);
+          }
+      });
+
+    return neighbors;
   }
 
   // Stretch!
@@ -73,7 +87,34 @@ public class Graph {
   // Return a list of any nodes that are orphans.
   // An orphan is any node with no edges.
   public ArrayList<GraphNode> findOrphans () {
-    return new ArrayList<GraphNode>();
+      ArrayList<GraphNode> orphans = new ArrayList<GraphNode>();
+
+      Hashtable<String, Integer> nodeFrequency = new Hashtable<String, Integer>();
+
+      int numNodes = this.nodes.size();
+      for (int i = 0; i < numNodes; i++) {
+          nodeFrequency.put(this.nodes.get(i).value, 0);
+      }
+
+      int numEdges = this.edges.size();
+      for (int i = 0; i < numEdges; i++) {
+          nodeFrequency.put(this.edges.get(i).first.value, nodeFrequency.get(this.edges.get(i).first.value) + 1);
+          nodeFrequency.put(this.edges.get(i).second.value, nodeFrequency.get(this.edges.get(i).second.value) + 1);
+      }
+
+      Set<String> keys = nodeFrequency.keySet();
+      for (String key: keys){
+          if (nodeFrequency.get(key) == 0) {
+              for (int i = 0; i < numNodes; i++) {
+                  if (this.nodes.get(i).value.equals(key)){
+                   orphans.add(this.nodes.get(i));
+                  }
+              }
+          }
+      }
+      boolean check = orphans.contains("C");
+
+      return orphans;
   }
 
   public void print () {
