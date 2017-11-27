@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Arrays;
+
 public class BasicSorting {
 
   public static int[] bubble(int[] array) {
@@ -18,11 +20,38 @@ public class BasicSorting {
   }
 
   public static int[] selection(int[] array) {
-    return array;
+      for (int j = 0; j < array.length; j++) {
+          int min = array[j];
+          int minIndex = j;
+          for (int i = j; i < array.length; i++) {
+              // find min
+              if (array[i] <= min) {
+                  min = array[i];
+                  minIndex = i;
+              }
+          }
+          // swap min with spot for selection
+          int temp = array[j];
+          array[j] = min;
+          array[minIndex] = temp;
+      }
+
+      return array;
   }
 
   public static int[] insertion(int[] array) {
-    return array;
+      for (int i = 1; i < array.length; i++) {
+
+          for (int j = i; j > 0; j--) {
+              if (array[j] < array[j-1]) {
+                  int temp = array[j-1];
+                  array[j-1] = array[j];
+                  array[j] = temp;
+              }
+          }
+
+      }
+      return array;
   }
   
 }
