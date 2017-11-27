@@ -5,7 +5,6 @@ import java.util.EmptyStackException;
 public class Queue {
     // reference to the head node.
     private Node head;
-    private Node tail;
 
   public boolean isEmpty() {
       if (this.head == null) {

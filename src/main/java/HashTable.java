@@ -13,33 +13,50 @@ public class HashTable {
   public HashTable(int size) {
     System.out.println("Initializing Hash Table");
     this.size = size;
-    table = new String[size];
+    table = new String[size + 1];
   }
 
   // Create a hash function to map the ID to an index
   // The resulting index should be bounded from [0, size)
   public int hashFunction(int id) {
-    return -1;
+      int hashId = (id * (id + 3)) % (this.size + 1);
+      return hashId;
   }
 
   // Insert a value into the HashTable given an ID
   public Boolean set(int id, String name) {
-    return false;
+      int hashId = hashFunction(id);
+      if (this.table[hashId] == null) {
+          this.table[hashId] = name;
+          this.items++;
+      } else {
+          this.table[hashId] = name;
+      }
+
+    return true;
   }
 
   // Access a value in the HashTable given an ID
   public String get(int id) {
-    return "Not Implemented";
+      int hashId = hashFunction(id);
+      return this.table[hashId];
   }
 
   // Delete a value in the HashTable given an ID
   public Boolean remove(int id) {
-    return false;
+      int hashId = hashFunction(id);
+      if (this.table[hashId] != null) {
+          this.table[hashId] = null;
+          this.items--;
+          return true;
+      } else {
+          return false;
+      }
   }
 
   // Return the number of items stored in the HashTable
   public int items() {
-    return 0;
+    return this.items;
   }
 
 }

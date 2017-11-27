@@ -20,19 +20,19 @@ public class BasicSorting {
   }
 
   public static int[] selection(int[] array) {
-      for (int j = 0; j < array.length; j++) {
-          int min = array[j];
+      for (int j = 0; j < array.length - 1; j++) {
+
           int minIndex = j;
-          for (int i = j; i < array.length; i++) {
+          for (int i = j + 1; i < array.length; i++) {
               // find min
-              if (array[i] <= min) {
-                  min = array[i];
+              if (array[i] <= array[minIndex]) {
                   minIndex = i;
               }
           }
+
           // swap min with spot for selection
           int temp = array[j];
-          array[j] = min;
+          array[j] = array[minIndex];
           array[minIndex] = temp;
       }
 
