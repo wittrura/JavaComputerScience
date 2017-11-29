@@ -63,18 +63,124 @@ public class BinarySearchTree {
     }
   }
 
-  public void delete(int value)
-  {
-     root = delete(root, value);
+  public void delete(int value) {
+     this.delete(root, value);
   }
 
-  private BSTNode delete(BSTNode node, int value)
-  {
-    //TODO
-     return node;
+  private void delete(BSTNode node, int value) {
+      if (node.left != null && node.left.value == value) {
+          BSTNode nodeToDelete = node.left;
+
+          // for leaves, delete with no promotion
+          if (nodeToDelete.left == null && nodeToDelete.right == null) {
+              node.left = null;
+              return;
+          }
+
+          // for one child, promote that child
+          if (this.hasOneChild(nodeToDelete)) {
+              node.left = this.getLoneChild(nodeToDelete);
+              return;
+          }
+
+          // for two child no descendants
+          // find a minimum value in the right subtree
+          BSTNode minimumValRightSubtree = this.getMinimumVal(nodeToDelete.right);
+          BSTNode minimumValRightParent = this.getMinimumValParent(nodeToDelete.right);
+
+          // replace value of the node to be removed with found minimum. Now, right subtree contains a duplicate!
+          node.left = minimumValRightSubtree;
+
+          minimumValRightSubtree.right = nodeToDelete.right;
+          minimumValRightSubtree.left = nodeToDelete.left;
+
+          minimumValRightParent.left = minimumValRightSubtree.right;
+
+          return;
+
+      } else if (node.right != null && node.right.value == value) {
+          BSTNode nodeToDelete = node.right;
+
+          // for leaves, delete with no promotion
+          if (nodeToDelete.left == null && nodeToDelete.right == null) {
+              node.right = null;
+              return;
+          }
+
+          // for one child, promote that child
+          if (this.hasOneChild(nodeToDelete)) {
+              node.right = this.getLoneChild(nodeToDelete);
+              return;
+          }
+
+          // for two child no descendants
+          // find a minimum value in the right subtree
+          BSTNode minimumValRightSubtree = this.getMinimumVal(nodeToDelete.right);
+          BSTNode minimumValRightParent = this.getMinimumValParent(nodeToDelete.right);
+
+          // replace value of the node to be removed with found minimum. Now, right subtree contains a duplicate!
+          node.right = minimumValRightSubtree;
+
+          minimumValRightParent.left = minimumValRightSubtree.right;
+
+          minimumValRightSubtree.right = nodeToDelete.right;
+          minimumValRightSubtree.left = nodeToDelete.left;
+
+          return;
+
+      } else if (value > node.value) {
+          // search right
+          if (node.right == null) {
+              return;
+          } else {
+              this.delete(node.right, value);
+          }
+      } else {
+          // search left
+          if (node.left == null) {
+              return;
+          } else {
+              this.delete(node.left, value);
+          }
+      }
+
+      return;
   }
 
   public BSTNode getRoot() {
     return root;
   }
+
+    private boolean hasOneChild(BSTNode node) {
+        if (node.left != null && node.right == null) {
+            return true;
+        }
+        if (node.left == null && node.right != null) {
+            return true;
+        }
+        return false;
+    }
+
+    private BSTNode getLoneChild(BSTNode node) {
+        if (node.left != null) {
+            return node.left;
+        } else {
+            return node.right;
+        }
+    }
+
+    private BSTNode getMinimumVal(BSTNode node) {
+//        if no left children, return minimum val
+        if (node.left == null) {
+            return node;
+        }
+        return getMinimumVal(node.left);
+    }
+
+    private BSTNode getMinimumValParent(BSTNode node) {
+        if (node.left.left == null) {
+            return node;
+        }
+        return getMinimumVal(node.left);
+    }
 }
