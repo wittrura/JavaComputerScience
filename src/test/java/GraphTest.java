@@ -90,15 +90,18 @@ public class GraphTest {
 
    @Test
    public void ShouldGetOrphans () {
-     Graph graph = new Graph();
-     // A <-> B   C
-     graph.addNode("A");
-     graph.addNode("B");
-     graph.addNode("C");
-     graph.addEdge("A", "B", 10);
-     ArrayList<Graph.GraphNode> orphans = graph.findOrphans();
-     Assert.assertEquals(1, orphans.size());
-     Assert.assertEquals(true, orphans.contains("C"));
+      Graph graph = new Graph();
+      // A <-> B   C
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("C");
+        graph.addEdge("A", "B", 10);
+        ArrayList<Graph.GraphNode> orphans = graph.findOrphans();
+        Assert.assertEquals(1, orphans.size());
+
+        // not valid - orphans is an arraylist of nodes, so it would not contain the string "C"
+        // Assert.assertEquals(true, orphans.contains("C"));
+        Assert.assertEquals("C", orphans.get(0).value);
    }
 
 }

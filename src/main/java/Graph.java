@@ -76,13 +76,16 @@ public class Graph {
     return neighbors;
   }
 
+
   // Stretch!
   // Find the optimal route from start to finish
   // Return each edge required to traverse the route
   // Remember that edges are not directional: A -> B also implies B -> A
   public ArrayList<GraphEdge> findPath (String start, String finish) {
+//      Dijkstra's algorithm
     return new ArrayList<GraphEdge>();
   }
+
 
   // Return a list of any nodes that are orphans.
   // An orphan is any node with no edges.
@@ -112,7 +115,6 @@ public class Graph {
               }
           }
       }
-      boolean check = orphans.contains("C");
 
       return orphans;
   }
