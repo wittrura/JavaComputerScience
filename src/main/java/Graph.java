@@ -1,6 +1,9 @@
 package main;
 
 import java.util.*;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 
 //This represents a non-directional Graph
 //Values of nodes can contain strings
@@ -82,8 +85,60 @@ public class Graph {
   // Return each edge required to traverse the route
   // Remember that edges are not directional: A -> B also implies B -> A
   public ArrayList<GraphEdge> findPath (String start, String finish) {
-//      Dijkstra's algorithm
-    return new ArrayList<GraphEdge>();
+      // Dijkstra's
+      ArrayList<GraphEdge> path = new ArrayList();
+
+      Comparator<Vertex> comparator = new VertexDistanceComparator();
+      PriorityQueue<Vertex> queue = new PriorityQueue<Vertex>(this.nodes.size(), comparator);
+
+      // build min priority queue with starting point at zero, all others equal to infinity
+      for (int i = 0; i < nodes.size(); i++) {
+          Vertex newVertex = new Vertex(nodes.get(i));
+          if (newVertex.value.equals(start)) newVertex.distance = 0;
+          queue.add(newVertex);
+      }
+
+      while (queue.size() > 0) {
+          // remove 'nearest' node from queue, lowest distance
+          Vertex vertex = queue.poll();
+          if (vertex.value.equals(finish)) {
+              return path;
+          }
+
+          // get edges to all neighbors
+          ArrayList<GraphEdge> vertexEdges = new ArrayList();
+          for (int i = 0; i < this.edges.size(); i++) {
+              if (this.edges.get(i).first.value.equals(vertex.value) || this.edges.get(i).second.value.equals(vertex.value)) {
+                  vertexEdges.add(this.edges.get(i));
+              }
+          }
+
+          // update min priority queue based on edges
+          for (int j = 0; j < vertexEdges.size(); j++) {
+              if (vertexEdges.get(j).first.value.equals(vertex.value)) {
+                  // if first node is start, then use the second node and find the corresponding vertex to update min priority queue
+                  this.updateDistance(vertexEdges.get(j), vertexEdges.get(j).second, queue, vertex);
+              } else {
+                  // else, use the first node and find the corresponding vertex to update min priority queue
+                  this.updateDistance(vertexEdges.get(j), vertexEdges.get(j).first, queue, vertex);
+              }
+          }
+      }
+
+
+      // System.out.println(queue.peek().distance);
+      return path;
+  }
+
+  public void updateDistance (GraphEdge edge, GraphNode node, PriorityQueue<Vertex> queue, Vertex startingVertex) {
+      Iterator it = queue.iterator();
+      while (it.hasNext()) {
+          Vertex vertex = (Vertex)it.next();
+          if (vertex.value.equals(node.value)) {
+              vertex.distance = edge.weight + startingVertex.distance;
+              break;
+          }
+      }
   }
 
 
@@ -156,6 +211,29 @@ public class Graph {
       this.weight = weight;
     }
 
+  }
+
+  public class Vertex {
+      String value;
+      double distance;
+
+      Vertex(GraphNode node) {
+          this.value = node.value;
+          distance = Double.POSITIVE_INFINITY;
+      }
+  }
+
+  public class VertexDistanceComparator implements Comparator<Vertex> {
+    public int compare(Vertex x, Vertex y) {
+        if (x.distance < y.distance) {
+            return -1;
+        }
+
+        if (x.distance > y.distance) {
+            return 1;
+        }
+        return 0;
+    }
   }
 
 }
